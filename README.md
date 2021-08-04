@@ -83,7 +83,7 @@ Training times were way shorter than both previously tried methods. 100 epochs o
 
 I tried improving the statistics by fiddling with the learning rate and n-gram settings, but never reached precisions more than 0.62.
 
-Aformentioned tests were performed on Slovenian data, which might be harder to grasp than English. When trying the same 'tricks' for English, better results were obtained. Instead of 0.62 the resulting precision was 0.75.
+Aformentioned tests were performed on Slovenian data, which might be harder to grasp than English. When trying the same 'tricks' for English, better results were obtained. Instead of 0.62 the resulting precision was 0.75. When using 2-grams instead of 3-grams, precision rose marginally, and when only using 1-grams, it marginally fell.
 
 
 # Slovenian and Croatian language data
