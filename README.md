@@ -81,6 +81,9 @@ At first glance the API is easier to work with than HuggingFace. In the first tr
 
 Training times were way shorter than both previously tried methods. 100 epochs only needed 515 ms.
 
-I tried improving the statistics by 
+I tried improving the statistics by fiddling with the learning rate and n-gram settings, but never reached precisions more than 0.62.
+
+Aformentioned tests were performed on Slovenian data, which might be harder to grasp than English. When trying the same 'tricks' for English, better results were obtained. Instead of 0.62 the resulting precision was 0.75.
+
 
 # Slovenian and Croatian language data
