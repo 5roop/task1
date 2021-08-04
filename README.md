@@ -66,6 +66,21 @@ optimizer.step()
 Unfortunately, all attempts raised
 ```python
 RuntimeError: [enforce fail at CPUAllocator.cpp:71] . DefaultCPUAllocator: can't allocate memory: you tried to allocate 60637052928 bytes. Error code 12 (Cannot allocate memory)
+```
 
+# Fasttext
+
+When researching Fasttext we noticed that the input seems to be necesserily as saved file with a specific format:
 
 ```
+__label__Offensive Lorem Ipsum dolor sit amet.
+```
+We prepared a few helper functions that sorted this preprocessing for us. Again, all labels have beed downsampled to either `Acceptable` or `Offensive`.
+
+At first glance the API is easier to work with than HuggingFace. In the first try precision and recall were equal at 0.54. After increasing the number of epochs a bit those metrics rose to 0.62, they were still equal, and did not rose even after increasing the number of epoch to ridiculous numbers.
+
+Training times were way shorter than both previously tried methods. 100 epochs only needed 515 ms.
+
+I tried improving the statistics by 
+
+# Slovenian and Croatian language data
