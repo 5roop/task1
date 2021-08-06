@@ -53,8 +53,12 @@ Other than roberta I also tried to find the most suitable checkpoint. For Englis
 The training took about $1~\mathrm{minute}$ for all languages.
 
 
-I found a `bert` checkpoint on huggingface, `"IMSyPP/hate_speech_slo"`. Interestingly it did not perform better on slovenian data
+I found a `bert` checkpoint on huggingface, `"IMSyPP/hate_speech_slo"`. Interestingly it did not perform much better on slovenian data:
 
+
+|  language | accuracy  |  f1 |
+|---|---|---|
+|sl|0.558|0.53|
 
 
 # HuggingFace
