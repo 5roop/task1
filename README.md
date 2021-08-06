@@ -49,6 +49,7 @@ Other than roberta I also tried to find the most suitable checkpoint. For Englis
 |en   | 0.769  |   0.475|
 |sl|0.535|0.542|
 |hr| 0.6996| 0.7799|
+
 The training took about $1~\mathrm{minute}$ for all languages.
 
 
@@ -117,4 +118,5 @@ Hyperparameters used: ` epoch=1000, lr=0.05`.
 |  en |  0.744 |  0.640|
 |sl| 0.62 |0.619|
 |hr|0.72|0.69|
- Training times was $<10~\mathrm{s}$ for all training sessions.
+
+Training times was $<10~\mathrm{s}$ for all training sessions.
