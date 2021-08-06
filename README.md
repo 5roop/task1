@@ -85,5 +85,11 @@ I tried improving the statistics by fiddling with the learning rate and n-gram s
 
 Aformentioned tests were performed on Slovenian data, which might be harder to grasp than English. When trying the same 'tricks' for English, better results were obtained. Instead of 0.62 the resulting precision was 0.75. When using 2-grams instead of 3-grams, precision rose marginally, and when only using 1-grams, it marginally fell.
 
+## Results:
+Hyperparameters used: ` epoch=1000, lr=0.05`
+|  language | accuracy   | f_1 score |
+|---|---| --- |
+|  en |  0.744 |  0.640|
+|sl| 0.62 |0.619|
+|hr|0.72|0.69|
 
-# Slovenian and Croatian language data
