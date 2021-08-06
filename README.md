@@ -60,7 +60,18 @@ I found a `bert` checkpoint on huggingface, `"IMSyPP/hate_speech_slo"`. Interest
 |---|---|---|
 |sl|0.558|0.53|
 
+## Results -  `sangrimlee/bert-base-multilingual-cased-nsmc`
+Without much deliberation I also windowshopped a bit and found the aforementioned checkpoint that I tested on all three languages.
 
+|  language | accuracy  |  f1 |
+|---|---|---|
+|en   |  0.794 |   0.584   |
+|sl|   0.657  |  0.668  |
+|hr|    0.787 |   0.836  |
+
+Training took around 2 minutes, significantly longer than previous examples.
+
+I also wanted to try  `unitary/multilingual-toxic-xlm-roberta`, but couldn't get it to work properly (training phase worked OK, but upon evaluating it crashed due to `TypeError`. I suspect the fact that I could not set the appropriate model type when initialising the classifier, because of a warning `You are using a model of type xlm-roberta to instantiate a model of type roberta.`, but I could not figure out the proper model type that would not raise this warning or even worse, a `KeyError`.)
 # HuggingFace
 
 I tried training a pretrained model from different checkpoints:
@@ -140,10 +151,50 @@ When evaluating the classifier training data had to be processed with the same c
 
 Execution of the whole pipeline took about 10 s.
 
+# Multilabel classification
+
+## simpletransformers
+
+
+The nature of the problem demanded I add `num_labels=6`, but precisely in the right spot, otherwise it would not work. Because of an unknown reason training with option `use_cuda=True` kept raising `RuntimeError` messages, so the training took a bit longer than previously (I estimate an increase of at least two orders of magnitude). I used `roberta-base` as it yielded better results in the binary classification tests.
+
+After leaving it running and checking it in the evening I can finally report the following scores:
+
+
+|  language | accuracy  |  f1 |
+|---|---|---|
+|en| 0.814 | 0.33 |
+|sl| 0.429 | 0.153 |
+|hr| 0.645 | 0.29 |
+
+
+## fasttext
+
+The library performed admirably and achieved suprisingly high accuracies for such a high number of labels. Data preprocessing was modified to accomodate new labels.
+
+|  language | accuracy  |  f1 |
+|---|---|---|
+|en| 0.705 | 0.228 |
+|sl| 0.47 | 0.233 |
+|hr| 0.605 | 0.349|
+
+## `sk-learn` toolbox
+
+No new suprises were waiting for me when generalising to full label set. We see the metrics dip a bit, as we would expect.
+
+
+|  language | accuracy  |  f1 |
+|---|---|---|
+|en| 0.739 | 0.171 |
+|sl| 0.436 | 0.11 |
+|hr| 0.612 | 0.29 |
+
 # Concluding remarks
 
 * After initial problems with the virtual machine were resolved, it worked like a charm. I found the VS Code ssh functionality incredibly useful; I started a jupyter lab server on the remote machine and VS Code took care of ssh tunneling without any complications, the same goes for git integration. This way it was hardly noticeable that I was running the entire process on a remote machine.
 * Slovenian data consistently performs worse. This might be due to the low quality of the input data, I encountered weird, Hojsian punctuation style (e.g. misplaced .periods ,and commas). Additional preprocessing should no doubt improve classification accuracy, but since this was not the purpose of this exercise, it was not performed.
-* HuggingFace seems versatile, but proved difficult to handle. simpletransformers on the other hand offer a much simpler API with no clutter and quicker results.
+* `HuggingFace` seems versatile, but proved difficult to handle. `simpletransformers` on the other hand offer a much simpler API with no clutter and quicker results. HF model hub offers snippets for using the models in HF, but to use them in `simpletransformers` not only the checkpoint but the model type is needed, and this can sometimes be an annoying guessing game at best.
+* On non-binary classification `simpletransformers` needed an absurd amount of time, but at least on English dataset vastly outperformed any other method.
 * Fasttext requires a specific formatting and so far I was unable to get it to work with input other than in file format, which is a bit cumbersome, but it is incredibly fast and the results obtained are not bad at all.
-* sklearn NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
+* `sklearn` NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
+* The results presented correspond to the `lgbt` dataset. It could easily be recalculated for the `migrants` dataset as well, but I did not combine the two datasets and train classifiers on the resulting conglomerate. 
