@@ -133,3 +133,13 @@ When evaluating the classifier training data had to be processed with the same c
 |  en |  0.757 |  0.220|
 |sl| 0.578 |0.505|
 |hr|0.704|0.810|
+
+Execution of the whole pipeline took about 10 s.
+
+# Concluding remarks
+
+* After initial problems with the virtual machine were resolved, it worked like a charm. I found the VS Code ssh functionality incredibly useful; I started a jupyter lab server on the remote machine and VS Code took care of ssh tunneling without any complications, the same goes for git integration. This way it was hardly noticeable that I was running the entire process on a remote machine.
+* Slovenian data consistently performs worse. This might be due to the low quality of the input data, I encountered weird, Hojsian punctuation style (e.g. misplaced .periods ,and commas). Additional preprocessing should no doubt improve classification accuracy, but since this was not the purpose of this exercise, it was not performed.
+* HuggingFace seems versatile, but proved difficult to handle. simpletransformers on the other hand offer a much simpler API with no clutter and quicker results.
+* Fasttext requires a specific formatting and so far I was unable to get it to work with input other than in file format, which is a bit cumbersome, but it is incredibly fast and the results obtained are not bad at all.
+* sklearn NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
