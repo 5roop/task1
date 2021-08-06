@@ -33,6 +33,29 @@ F1 score:  0.688212927756654
 
 With distilbert I was able to get the accuracy at most to 0.78 with F_1 score of 0.5.
 
+## Results - roberta base
+|  language | accuracy  |  f1 |
+|---|---|---|
+|en   |0.843   |  0.693 |
+|sl|0.597|0.6048|
+|hr| 0.780| 0.8336|
+
+
+Other than roberta I also tried to find the most suitable checkpoint. For English it would seem that `distilbert-base-uncased-finetuned-sst-2-english` is the natural best fit, but I also tried it on the other languages.
+
+## Results - distilbert 
+|  language | accuracy  |  f1 |
+|---|---|---|
+|en   | 0.769  |   0.475|
+|sl|0.535|0.542|
+|hr| 0.6996| 0.7799|
+The training took about $1~\mathrm{minute}$ for all languages.
+
+
+I found a `bert` checkpoint on huggingface, `"IMSyPP/hate_speech_slo"`. Interestingly it did not perform better on slovenian data
+
+
+
 # HuggingFace
 
 I tried training a pretrained model from different checkpoints:
@@ -41,20 +64,20 @@ I tried training a pretrained model from different checkpoints:
 * distilbert-base-uncased-finetuned-sst-2-english
 * roberta-base
 
-The optimization looked as follows:
+The optimization was attempted with the following approach, based on the HuggingFace documentation:
 
 ```python
 import torch
 from transformers import AdamW, AutoTokenizer, AutoModelForSequenceClassification
 
-# Same as before
+
 checkpoint = "roberta-base"
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
 sequences = list(train.text.values)
 batch = tokenizer(sequences, padding=True, truncation=True, return_tensors="pt")
 
-# This is new
+
 batch["labels"] = torch.tensor(list(train.labels.values))
 
 optimizer = AdamW(model.parameters())
@@ -70,7 +93,7 @@ RuntimeError: [enforce fail at CPUAllocator.cpp:71] . DefaultCPUAllocator: can't
 
 # Fasttext
 
-When researching Fasttext we noticed that the input seems to be necesserily as saved file with a specific format:
+When researching Fasttext we noticed that the input seems to be a saved file with a specific format:
 
 ```
 __label__Offensive Lorem Ipsum dolor sit amet.
@@ -85,11 +108,13 @@ I tried improving the statistics by fiddling with the learning rate and n-gram s
 
 Aformentioned tests were performed on Slovenian data, which might be harder to grasp than English. When trying the same 'tricks' for English, better results were obtained. Instead of 0.62 the resulting precision was 0.75. When using 2-grams instead of 3-grams, precision rose marginally, and when only using 1-grams, it marginally fell.
 
+In order to compare the metrics directly I also computed the accuracies and f_1 scores for the true and predicted labels.
+
 ## Results:
-Hyperparameters used: ` epoch=1000, lr=0.05`
+Hyperparameters used: ` epoch=1000, lr=0.05`.
 |  language | accuracy   | f_1 score |
 |---|---| --- |
 |  en |  0.744 |  0.640|
 |sl| 0.62 |0.619|
 |hr|0.72|0.69|
-
+ Training times was $<10~\mathrm{s}$ for all training sessions.
