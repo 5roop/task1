@@ -120,3 +120,16 @@ Hyperparameters used: ` epoch=1000, lr=0.05`.
 |hr|0.72|0.69|
 
 Training times was $<10~\mathrm{s}$ for all training sessions.
+
+# `sk-learn` toolbox
+
+Scikit learn also offers a few options for working with text data. Following a few suggestions on their webpage I prepared a `CountVectorizer` that performed text tokenization for the input text. Features were then extracted using `tf-idf` method with sklearn tools,  and a SVM classifier was trained with these inputs.
+
+When evaluating the classifier training data had to be processed with the same count vectorizer and tf-idf transformer and only then it was fed to the SVM classifier. Count vectorizer was set to use 1-, 2- and 3-grams. Other hyperparameters were left at default values.
+
+## Results
+|  language | accuracy   | f_1 score |
+|---|---| --- |
+|  en |  0.757 |  0.220|
+|sl| 0.578 |0.505|
+|hr|0.704|0.810|
