@@ -24,7 +24,8 @@ model = ClassificationModel(
 )
 ```
 
-and got a confusion matrix: 'tp': 181, 'tn': 672, 'fp': 68, 'fn': 96
+and got a confusion matrix: `'tp': 181, 'tn': 672, 'fp': 68, 'fn': 96`.
+
 I also calculated accuracy and F_1 score:
 ```
 Accuracy:  0.8387413962635202
@@ -200,3 +201,4 @@ No new suprises were waiting for me when generalising to full label set. We see 
 * `Fasttext` requires a specific formatting and so far I was unable to get it to work with input other than in file format, which is a bit cumbersome, but it is incredibly fast and the results obtained are not bad at all.
 * `sklearn` NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
 * The results presented correspond to the `lgbt` dataset. It could easily be recalculated for the `migrants` dataset as well, but I did not combine the two datasets and train classifiers on the resulting conglomerate. Please advise if this should be done.
+* Only in my final tests, when I was certain how to setup the pipeline, was the pipeline run with a bit more automatization. In the future, especially with the expected consistent input formats, I expect to be able to run the experiments with much less human intervention and automatic result reporting.
