@@ -202,3 +202,8 @@ No new suprises were waiting for me when generalising to full label set. We see 
 * `sklearn` NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
 * The results presented correspond to the `lgbt` dataset. It could easily be recalculated for the `migrants` dataset as well, but I did not combine the two datasets and train classifiers on the resulting conglomerate. Please advise if this should be done.
 * Only in my final tests, when I was certain how to setup the pipeline, was the pipeline run with a bit more automatization. In the future, especially with the expected consistent input formats, I expect to be able to run the experiments with much less human intervention and automatic result reporting.
+
+# Open questions
+* Should I continue with the joint lgbt and migrant hate speech classifier?
+* I'd really like to sort out the problems I found with the HuggingFace API, do you have any pointers for me or should I try to fix it on my own?
+  
