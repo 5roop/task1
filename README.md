@@ -181,7 +181,7 @@ The library performed admirably and achieved suprisingly high accuracies for suc
 
 ## `sk-learn` toolbox
 
-No new suprises were waiting for me when generalising to full label set. We see the metrics dip a bit, as we would expect.
+No new suprises were waiting for me when generalising to full label set. We see the metrics dip a bit compared to binary classification tests, as we would expect.
 
 
 |  language | accuracy  |  f1 |
