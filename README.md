@@ -1,6 +1,8 @@
 # task1 report
 
-First I relabeled the data. Since the task was classifying hate speech, I set labels  'Acceptable speech' to 0, all other labels presented some sort of hate speech and were labeled 1.
+First I relabeled the data. Since the task was classifying hate speech, I set labels  'Acceptable speech' to 0, all other labels presented some sort of hate speech and were labeled 1. Should I redo this task from scratch I would wait until it was clear this was needed.
+
+In all tests training was performed on `*.train.tsv` datasets and `*.test.tsv` files were used for evaluation.
 
 # Simpletransformers
 I started with monolingual dataset `lgbt-en.train.tsv`. My first attempt was with simpletransformers library.
@@ -200,6 +202,7 @@ No new suprises were waiting for me when generalising to full label set. We see 
 * On non-binary classification `simpletransformers` needed an absurd amount of time, but at least on English dataset outperformed any other method.
 * `Fasttext` requires a specific formatting and so far I was unable to get it to work with input other than in file format, which is a bit cumbersome, but it is incredibly fast and the results obtained are not bad at all.
 * `sklearn` NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
+    * After tokenization many classifiers can be used here, all of them could be further optimized with grid search for optimal hyperparameters, which exponentially increases the complexity of the problem, so at this stage this was not performed, but it should be mentioned that it could be done and that the results presented here can be improved a bit. Maybe a follow-up with a systematic `AutoML` optimisation would be interesting.
 * The results presented correspond to the `lgbt` dataset. It could easily be recalculated for the `migrants` dataset as well, but I did not combine the two datasets and train classifiers on the resulting conglomerate. Please advise if this should be done.
 * Only in my final tests, when I was certain how to setup the pipeline, was the pipeline run with a bit more automatization. In the future, especially with the expected consistent input formats, I expect to be able to run the experiments with much less human intervention and automatic result reporting.
 
