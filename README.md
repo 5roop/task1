@@ -1,4 +1,4 @@
-# task1
+# task1 report
 
 First I relabeled the data. Since the task was classifying hate speech, I set labels  'Acceptable speech' to 0, all other labels presented some sort of hate speech and were labeled 1.
 
@@ -44,7 +44,7 @@ With distilbert I was able to get the accuracy at most to 0.78 with F_1 score of
 
 Other than roberta I also tried to find the most suitable checkpoint. For English it would seem that `distilbert-base-uncased-finetuned-sst-2-english` is the natural best fit, but I also tried it on the other languages.
 
-## Results - distilbert 
+## Results - `distilbert` 
 |  language | accuracy  |  f1 |
 |---|---|---|
 |en   | 0.769  |   0.475|
@@ -193,11 +193,11 @@ No new suprises were waiting for me when generalising to full label set. We see 
 # Concluding remarks
 
 * After initial problems with the virtual machine were resolved, it worked like a charm. I found the VS Code ssh functionality incredibly useful; I started a `jupyter lab` server on the remote machine and VS Code took care of ssh tunneling without any complications, the same goes for git integration. This way it was hardly noticeable that I was running the entire process on a remote machine. Once I got the IJS VPN working as well, I finally felt ready for working from home. Every lockdown I learn something new...
-* Slovenian data consistently performs worse. This might be due to the low quality of the input data, I encountered weird, Hojsian punctuation style (e.g. misplaced .periods ,and commas [sic]), as well as many emoji and links to websites. I did not examine the whole dataset exhaustively but I did not see many such instances in the other two datasets.
+* Slovenian data consistently performs worse. This might be due to the low quality of the input data, I encountered weird, Hojsian punctuation style (e.g. misplaced .periods ,and commas [sic]), misspellings like "lejzbika", "muslimanska vira", "gdo nebi", "buzarantskega turizma"... as well as many emojis and links to websites. I did not examine the whole dataset exhaustively but I did not see many such instances in the other two datasets.
  Additional preprocessing should no doubt improve classification accuracy, but since this was not the purpose of this exercise, it was not performed.
-* `HuggingFace` seems versatile, but proved difficult to handle. Even when I could tackle the API issues and got things to run, weird performance issues surfaced.
+* `HuggingFace` seems versatile, but proved difficult to handle. Even when I could tackle the API issues and got things to run, weird performance issues surfaced and sabotaged the tests.
 * `simpletransformers` on the other hand offer a much simpler API with no clutter and quicker results. HF model hub offers snippets for using the models in HF, but to use them in `simpletransformers` not only the checkpoint but the model type is needed, and this can sometimes be an annoying guessing game at best.
-* On non-binary classification `simpletransformers` needed an absurd amount of time, but at least on English dataset vastly outperformed any other method.
+* On non-binary classification `simpletransformers` needed an absurd amount of time, but at least on English dataset outperformed any other method.
 * `Fasttext` requires a specific formatting and so far I was unable to get it to work with input other than in file format, which is a bit cumbersome, but it is incredibly fast and the results obtained are not bad at all.
 * `sklearn` NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
 * The results presented correspond to the `lgbt` dataset. It could easily be recalculated for the `migrants` dataset as well, but I did not combine the two datasets and train classifiers on the resulting conglomerate. Please advise if this should be done.
