@@ -210,4 +210,106 @@ No new suprises were waiting for me when generalising to full label set. We see 
 # Open questions
 * Should I continue with the joint lgbt and migrant hate speech classifier?
 * I'd really like to sort out the problems I found with the HuggingFace API, do you have any pointers for me or should I try to fix it on my own?
-  
+
+# Addendum
+
+## Dummy classifiers
+
+As a dummy standard against which we compare our results a `dummy classifier` was introduced. All but one strategy was used and the dummy results are as follows:
+
+|Strategy:| most_frequent||
+|---|---|---|
+|  language | accuracy  |  f1 |
+|en| 0.728 | 0.0 |
+|sl| 0.432 | 0.0 |
+|hr| 0.651 | 0.789 |
+
+|Strategy:| prior||
+|---|---|---|
+|  language | accuracy  |  f1 |
+|en| 0.728 | 0.0 |
+|sl| 0.432 | 0.0 |
+|hr| 0.651 | 0.789 |
+
+
+|Strategy:| uniform||
+|---|---|---|
+|  language | accuracy  |  f1 |
+|en| 0.485 | 0.35 |
+|sl| 0.534 | 0.564 |
+|hr| 0.515 | 0.576 |
+
+|Strategy:| stratified||
+|---|---|---|
+|  language | accuracy  |  f1 |
+|en| 0.624 | 0.308 |
+|sl| 0.498 | 0.52 |
+|hr| 0.545 | 0.65 |
+
+​The available, but unused strategy was `constant`, which always predicts a constant value. If the value givent to it would be the most common value, the accuracy would be equivalent to the accuracy of the dummy classifier working in the `most frequent` regime, otherwise it would be its reverse (i.e. 1-value).
+
+Since we assume the training and testing datasets were sampled correctly and we hope that they are both representative, the most useful setting for the dummy classifier is probably indeed `stratified`.
+
+So to compare results obtained on training binary classifiers the lowest bar to clear should probably be:
+|Strategy:| stratified||
+|---|---|---|
+|  language | accuracy  |  f1 |
+|en| 0.624 | 0.308 |
+|sl| 0.498 | 0.52 |
+|hr| 0.545 | 0.65 |
+
+
+## Char-ngrams
+
+Good catch, previous experiments were indeed performed on word n-grams. After changing that to character n-grams in the recommended bracket I was able to produce the following result:
+|  language | accuracy  |  f1 |
+|---|---|---|
+|en| 0.76 | 0.233 |
+|sl| 0.616 | 0.539 |
+|hr| 0.736 | 0.83 |,
+
+which is marginally better than the previous results for all languages and for all metrics.
+
+## Language appropriate models
+
+### `EMBEDDIA/sloberta`
+|  language | accuracy  |  f1 |
+|---|---|---|
+|sl| 0.693 | 0.709 |
+
+Training took 4 minutes.
+
+### `EMBEDDIA/crosloengual-bert`, Slovenian
+
+|  language | accuracy  |  f1 |
+|---|---|---|
+|sl|  0.693| 0.701 |
+
+Training took 1 minute and 16 seconds.
+
+### `EMBEDDIA/crosloengual-bert`, Croatian
+
+|  language | accuracy  |  f1 |
+|---|---|---|
+|hr|  0.842| 0.879 |
+
+Training took 1 minute and 37 seconds.
+
+### `classla/bcms-bertic`
+
+I noticed I can instantiate the classifier with `model_type="bert"` and it will still run, although with warnings about it.
+
+|language|accuracy|f1 score|
+|---|---|---|
+|hr|0.758|0.819|
+
+Training took 1min 50s.
+
+If instead I instantiate it as a type `electra`, as the warnings suggest, it also works, but better:
+
+
+|language|accuracy|f1 score|
+|---|---|---|
+|hr|0.859|0.893|
+
+Training took 1min 35s.
