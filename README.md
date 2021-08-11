@@ -267,10 +267,16 @@ Good catch, previous experiments were indeed performed on word n-grams. After ch
 |  language | accuracy  |  f1 |
 |---|---|---|
 |en| 0.76 | 0.233 |
+|word:en |	0.757 |	0.220|
+|dummy:en| 0.624 | 0.308 |
 |sl| 0.616 | 0.539 |
-|hr| 0.736 | 0.83 |,
+|word:sl |	0.578 |	0.505|
+|dummy:sl| 0.498 | 0.52 |
+|hr| 0.736 | 0.83 |
+|word:hr| 	0.704 |	0.810|
+|dummy:hr| 0.545 | 0.65 |,
 
-which is marginally better than the previous results for all languages and for all metrics.
+In this awkward table (which should really be multiindexed) the prefix `dummy:` denotes the dummy classifier results and the prefix `word:` denotes results from testing on word n-grams.
 
 ## Better suited models based on the input language
 
