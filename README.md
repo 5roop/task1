@@ -272,20 +272,22 @@ Good catch, previous experiments were indeed performed on word n-grams. After ch
 
 which is marginally better than the previous results for all languages and for all metrics.
 
-## Language appropriate models
+## Better suited models based on the input language
 
 ### `EMBEDDIA/sloberta`
 |  language | accuracy  |  f1 |
 |---|---|---|
 |sl| 0.693 | 0.709 |
+|dummy: sl| 0.616 | 0.539 |
 
-Training took 4 minutes.
+Training took 4 minutes. 
 
 ### `EMBEDDIA/crosloengual-bert`, Slovenian
 
 |  language | accuracy  |  f1 |
 |---|---|---|
 |sl|  0.693| 0.701 |
+|dummy: sl| 0.616 | 0.539 |
 
 Training took 1 minute and 16 seconds.
 
@@ -294,6 +296,7 @@ Training took 1 minute and 16 seconds.
 |  language | accuracy  |  f1 |
 |---|---|---|
 |hr|  0.842| 0.879 |
+|dummy:hr| 0.736 | 0.83 |
 
 Training took 1 minute and 37 seconds.
 
@@ -304,6 +307,7 @@ I noticed I can instantiate the classifier with `model_type="bert"` and it will 
 |language|accuracy|f1 score|
 |---|---|---|
 |hr|0.758|0.819|
+|dummy:hr| 0.736 | 0.83 |
 
 Training took 1min 50s.
 
@@ -313,5 +317,8 @@ If instead I instantiate it as a type `electra`, as the warnings suggest, it als
 |language|accuracy|f1 score|
 |---|---|---|
 |hr|0.859|0.893|
+|dummy:hr| 0.736 | 0.83 |
 
 Training took 1min 35s.
+
+## Remarks
