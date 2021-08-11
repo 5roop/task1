@@ -199,7 +199,7 @@ No new suprises were waiting for me when generalising to full label set. We see 
  Additional preprocessing should no doubt improve classification accuracy, but since this was not the purpose of this exercise, it was not performed.
 * `HuggingFace` seems versatile, but proved difficult to handle. Even when I could tackle the API issues and got things to run, weird performance issues surfaced and sabotaged the tests.
 * `simpletransformers` on the other hand offer a much simpler API with no clutter and quicker results. HF model hub offers snippets for using the models in HF, but to use them in `simpletransformers` not only the checkpoint but the model type is needed, and this can sometimes be an annoying guessing game at best.
-* On non-binary classification `simpletransformers` needed an absurd amount of time, but at least on English dataset outperformed any other method.
+* On non-binary classification `simpletransformers` needed an absurd amount of time, but at least on the English dataset outperformed any other method.
 * `Fasttext` requires a specific formatting and so far I was unable to get it to work with input other than in file format, which is a bit cumbersome, but it is incredibly fast and the results obtained are not bad at all.
 * `sklearn` NPL toolbox is a bit low level and it would be nice to have a wrapper around the individual parts of the pipeline, but once all the parts of the puzzle are in place, it performs decently enough, not to mention that it offers the user the whole palette of classifiers with the full power of their customizability.
     * After tokenization many classifiers can be used here, all of them could be further optimized with grid search for optimal hyperparameters, which exponentially increases the complexity of the problem, so at this stage this was not performed, but it should be mentioned that it could be done and that the results presented here can be improved a bit. Maybe a follow-up with a systematic `AutoML` optimisation would be interesting.
@@ -207,9 +207,7 @@ No new suprises were waiting for me when generalising to full label set. We see 
 * The results presented correspond to the `lgbt` dataset. It could easily be recalculated for the `migrants` dataset as well, but I did not combine the two datasets and train classifiers on the resulting conglomerate. Please advise if this should be done.
 * Only in my final tests, when I was certain how to setup the pipeline, was the pipeline run with a bit more automatization. In the future, especially with the expected consistent input formats, I expect to be able to run the experiments with much less human intervention and automatic result reporting.
 
-# Open questions
-* Should I continue with the joint lgbt and migrant hate speech classifier?
-* I'd really like to sort out the problems I found with the HuggingFace API, do you have any pointers for me or should I try to fix it on my own?
+
 
 # Addendum
 
@@ -217,38 +215,42 @@ No new suprises were waiting for me when generalising to full label set. We see 
 
 As a dummy standard against which we compare our results a `dummy classifier` was introduced. All but one strategy was used and the dummy results are as follows:
 
-|Strategy:| most_frequent||
-|---|---|---|
+- Strategy: `most_frequent`
+
 |  language | accuracy  |  f1 |
+|---|---|---|
 |en| 0.728 | 0.0 |
 |sl| 0.432 | 0.0 |
 |hr| 0.651 | 0.789 |
 
-|Strategy:| prior||
-|---|---|---|
+- Strategy: `prior`
+
 |  language | accuracy  |  f1 |
+|---|---|---|
 |en| 0.728 | 0.0 |
 |sl| 0.432 | 0.0 |
 |hr| 0.651 | 0.789 |
 
 
-|Strategy:| uniform||
-|---|---|---|
+- Strategy: `uniform`
+
 |  language | accuracy  |  f1 |
+|---|---|---|
 |en| 0.485 | 0.35 |
 |sl| 0.534 | 0.564 |
 |hr| 0.515 | 0.576 |
 
-|Strategy:| stratified||
-|---|---|---|
+- Strategy: `stratified`
+  
 |  language | accuracy  |  f1 |
+|---|---|---|
 |en| 0.624 | 0.308 |
 |sl| 0.498 | 0.52 |
 |hr| 0.545 | 0.65 |
 
-​The available, but unused strategy was `constant`, which always predicts a constant value. If the value givent to it would be the most common value, the accuracy would be equivalent to the accuracy of the dummy classifier working in the `most frequent` regime, otherwise it would be its reverse (i.e. 1-value).
+​The available, but unused strategy was `constant`, which always predicts a constant value. If the value givent to it would be the most common value, the accuracy would be equivalent to the accuracy of the dummy classifier working in the `most_frequent` regime, otherwise it would be its reverse (i.e. 1-value).
 
-Since we assume the training and testing datasets were sampled correctly and we hope that they are both representative, the most useful setting for the dummy classifier is probably indeed `stratified`.
+Since we assume the training and testing datasets were sampled correctly and we hope that they are both representative samples, the most useful setting for the dummy classifier is probably indeed `stratified`.
 
 So to compare results obtained on training binary classifiers the lowest bar to clear should probably be:
 |Strategy:| stratified||
