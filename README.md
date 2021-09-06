@@ -1,4 +1,76 @@
-# task1 report
+# Summary
+
+The objective was performing a series of practice binary classification tasks on [FRENK](https://www.clarin.si/repository/xmlui/handle/11356/1433) LGBT dataset in three languages (HR, EN and SL). Tools used:
+* `fasttext` 
+* `simpletransformers`
+* `scikit learn` NLP toolbox
+  
+## Results
+
+#### Fasttext:
+|  language | accuracy   | macro F1 |
+|---|---| --- |
+|  en |  0.744 |  0.640|
+|sl| 0.62 |0.619|
+|hr|0.72|0.69|
+
+#### `sk-learn` char n-grams:
+|  language | accuracy  |  macro F1 |
+|---|---|---|
+|en| 0.76 | 0.233 |
+|sl| 0.616 | 0.539 |
+|hr| 0.736 | 0.83 |
+
+#### Stratified dummy classifier:
+
+|  language | accuracy  |  macro F1 |
+|---|---|---|
+|en| 0.624 | 0.308 |
+|sl| 0.498 | 0.52 |
+|hr| 0.545 | 0.65 |
+
+#### `simpletransformers`
+
+All the models were finetuned on lgbt domain only and with the same hyperparameters.
+
+
+|model name| model type | language | accuracy | macro F1|
+|---|---|---|---|---|
+|EMBEDDIA/sloberta|camembert|sl|0.579|0.578|
+|EMBEDDIA/sloberta|roberta|sl|0.569|0.569|
+|EMBEDDIA/crosloengual-bert|bert|sl|0.597|0.596|
+|EMBEDDIA/crosloengual-bert|bert|hr|0.785|0.764|
+|classla/bcms-bertic|electra|hr|0.770|0.749|
+|xlm-roberta-base|xlm-roberta|hr|0.783|0.756|
+|xlm-roberta-base|xlm-roberta|sl|0.592|0.590|
+|xlm-roberta-base|xlm-roberta|en|0.845|0.793|
+|xlm-roberta-large|xlm-roberta|en|0.843|0.791|
+|roberta-base|roberta|en|0.840|0.786|
+
+
+
+
+When looking at the full dataset (lgbt + migrants domains), the statistics achieved are as follows:
+|model name| model type | language | accuracy | macro F1|
+|---|---|---|---|---|
+|EMBEDDIA/sloberta|camembert|sl|0.684|0.676|
+|EMBEDDIA/sloberta|roberta|sl|0.66|0.662|
+|EMBEDDIA/crosloengual-bert|bert|sl|0.686|0.680|
+|EMBEDDIA/crosloengual-bert|bert|hr|0.75|0.748|
+|classla/bcms-bertic|electra|hr|0.749|0.740|
+|xlm-roberta-base|xlm-roberta|sl|0.688|0.681|
+|xlm-roberta-base|xlm-roberta|hr|0.751|0.736|
+|xlm-roberta-base|xlm-roberta|en|0.810|0.800|
+|xlm-roberta-large|xlm-roberta|en|0.809|0.797|
+|roberta-base|roberta|en|0.811|0.799|
+
+
+
+
+
+
+
+# task1 chronological report
 
 First I relabeled the data. Since the task was classifying hate speech, I set labels  'Acceptable speech' to 0, all other labels presented some sort of hate speech and were labeled 1. Should I redo this task from scratch I would wait until it was clear this was needed.
 
