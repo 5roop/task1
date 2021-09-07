@@ -34,19 +34,22 @@ The objective was performing a series of practice binary classification tasks on
 All the models were finetuned on lgbt domain only and with the same hyperparameters.
 
 
+
 |model name| model type | language | accuracy | macro F1|
 |---|---|---|---|---|
-|IMSyPP/hate_speech_slo|bert|sl|0.579|0.579|
-|EMBEDDIA/sloberta|camembert|sl|0.730|0.729|
+|IMSyPP/hate_speech_slo|bert|sl|0.578|0.578|
+|xlm-roberta-base|xlmroberta|sl|0.623|0.622|
+|EMBEDDIA/sloberta|camembert|sl|0.717|0.717|
 |EMBEDDIA/sloberta|roberta|sl|Error|Can't load tokenizer for 'EMBEDDIA/sloberta'|
-|EMBEDDIA/crosloengual-bert|bert|sl|0.687|0.686|
-|EMBEDDIA/crosloengual-bert|bert|hr|0.844|0.829|
-|classla/bcms-bertic|electra|hr|0.849|0.832|
-|xlm-roberta-base|xlm-roberta|sl|Error|'xlm-roberta'|
-|xlm-roberta-base|xlm-roberta|hr|Error|'xlm-roberta'|
-|xlm-roberta-base|xlm-roberta|en|Error|'xlm-roberta'|
-|xlm-roberta-large|xlm-roberta|en|Error|'xlm-roberta'|
-|roberta-base|roberta|en|0.850|0.802|
+|EMBEDDIA/crosloengual-bert|bert|sl|0.692|0.692|
+|EMBEDDIA/crosloengual-bert|bert|hr|0.846|0.831|
+|classla/bcms-bertic|electra|hr|0.859|0.844|
+|xlm-roberta-base|xlmroberta|hr|0.759|0.745|
+|xlm-roberta-base|xlmroberta|en|0.816|0.746|
+|xlm-roberta-large|xlmroberta|en|0.845|0.787|
+|roberta-base|roberta|en|0.839|0.784|
+
+
 
 
 
