@@ -36,33 +36,19 @@ All the models were finetuned on lgbt domain only and with the same hyperparamet
 
 |model name| model type | language | accuracy | macro F1|
 |---|---|---|---|---|
-|EMBEDDIA/sloberta|camembert|sl|0.579|0.578|
-|EMBEDDIA/sloberta|roberta|sl|0.569|0.569|
-|EMBEDDIA/crosloengual-bert|bert|sl|0.597|0.596|
-|EMBEDDIA/crosloengual-bert|bert|hr|0.785|0.764|
-|classla/bcms-bertic|electra|hr|0.770|0.749|
-|xlm-roberta-base|xlm-roberta|hr|0.783|0.756|
-|xlm-roberta-base|xlm-roberta|sl|0.592|0.590|
-|xlm-roberta-base|xlm-roberta|en|0.845|0.793|
-|xlm-roberta-large|xlm-roberta|en|0.843|0.791|
-|roberta-base|roberta|en|0.840|0.786|
+|IMSyPP/hate_speech_slo|bert|sl|0.579|0.579|
+|EMBEDDIA/sloberta|camembert|sl|0.730|0.729|
+|EMBEDDIA/sloberta|roberta|sl|Error|Can't load tokenizer for 'EMBEDDIA/sloberta'|
+|EMBEDDIA/crosloengual-bert|bert|sl|0.687|0.686|
+|EMBEDDIA/crosloengual-bert|bert|hr|0.844|0.829|
+|classla/bcms-bertic|electra|hr|0.849|0.832|
+|xlm-roberta-base|xlm-roberta|sl|Error|'xlm-roberta'|
+|xlm-roberta-base|xlm-roberta|hr|Error|'xlm-roberta'|
+|xlm-roberta-base|xlm-roberta|en|Error|'xlm-roberta'|
+|xlm-roberta-large|xlm-roberta|en|Error|'xlm-roberta'|
+|roberta-base|roberta|en|0.850|0.802|
 
 
-
-
-When looking at the full dataset (lgbt + migrants domains), the statistics achieved are as follows:
-|model name| model type | language | accuracy | macro F1|
-|---|---|---|---|---|
-|EMBEDDIA/sloberta|camembert|sl|0.684|0.676|
-|EMBEDDIA/sloberta|roberta|sl|0.66|0.662|
-|EMBEDDIA/crosloengual-bert|bert|sl|0.686|0.680|
-|EMBEDDIA/crosloengual-bert|bert|hr|0.75|0.748|
-|classla/bcms-bertic|electra|hr|0.749|0.740|
-|xlm-roberta-base|xlm-roberta|sl|0.688|0.681|
-|xlm-roberta-base|xlm-roberta|hr|0.751|0.736|
-|xlm-roberta-base|xlm-roberta|en|0.810|0.800|
-|xlm-roberta-large|xlm-roberta|en|0.809|0.797|
-|roberta-base|roberta|en|0.811|0.799|
 
 
 
